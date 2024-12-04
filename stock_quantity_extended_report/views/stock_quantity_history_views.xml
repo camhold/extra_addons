@@ -1,0 +1,164 @@
+<odoo>
+    <record id="view_stock_product_tree_inherit" model="ir.ui.view">
+        <field name="name">product.product.tree.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.view_stock_product_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <!-- Agregar los nuevos campos -->
+                <field name="last_move_date" string="Último Movimiento" readonly="1"/>
+                <field name="move_type" string="Tipo Movimiento" readonly="1"/>
+                <field name="valuation_value" string="Valorizado" readonly="1"/>
+                <field name="location_ids" string="Ubicación"  widget="many2many_tags"  />
+                <field name="lot_ids"  string="Lotes Disponibles"  widget="many2many_tags"/>
+                <field name="valuation_account_id" string="Cuenta Contable de Valorización" readonly="1" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_stock_valuation_layer_tree_extended" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.tree.extended</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_valuation_at_date_tree_inherited"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="location_id" string="Ubicación"/>
+                <field name="unit_value" string="Precio Promedio Unitario"/>
+                <field name="total_valuation" string="Valor Total Valorizado"/>
+                <field name="valuation_account_id" string="Cuenta Contable"/>
+                <field name="move_type" string="Tipo de Movimiento"/>
+                <field name="last_move_date" string="Último Movimiento"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="view_stock_quant_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.quant.tree.inherit</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="weighted_average_price" string="Precio Unitario"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--record id="view_stock_quantity_history_inherit" model="ir.ui.view">
+        <field name="name">Inventory Report at Date Inherit</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock.view_stock_quantity_history"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer" position="inside">
+                <button name="open_detailed_view" string="Informe Detallado " type="object" class="btn-danger" data-hotkey="d"/>
+            </xpath>
+        </field>
+    </record-->
+
+
+
+    <record id="view_stock_quant_tree_extended" model="ir.ui.view">
+        <field name="name">stock.quant.tree.extended</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="lot_id" string="Lote"/>
+                <field name="quantity" string="Cantidad"/>
+                <field name="location_id" string="Ubicación"/>
+                <field name="unit_value" string="Precio Promedio Unitario"/>
+                <field name="total_valuation" string="Valor Total Valorizado"/>
+                <field name="valuation_account_id" string="Cuenta Contable"/>
+                <field name="move_type" string="Tipo de Movimiento"/>
+                <field name="last_move_date" string="Último Movimiento"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+<!--vistas wizard y reporte personalizado-->
+
+        <record id="view_inventory_valuation_wizard_form" model="ir.ui.view">
+            <field name="name">inventory.valuation.wizard.form</field>
+            <field name="model">inventory.valuation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Generar Reporte de Valorización de Inventario">
+                    <group>
+                        <field name="report_date"/>
+                    </group>
+                    <footer>
+                        <!--button string="Generar por sql" type="object" name="generate_report" class="btn-primary"/-->
+                        <button string="Generar por orm" type="object" name="generate_report_by_orm" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_inventory_valuation_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de Valorización de Inventario</field>
+            <field name="res_model">inventory.valuation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+
+        <record id="view_inventory_valuation_report_tree" model="ir.ui.view">
+            <field name="name">inventory.valuation.report.tree</field>
+            <field name="model">inventory.valuation.report</field>
+            <field name="arch" type="xml">
+              <tree string="Reporte de Valorización de Inventario" decoration-info="quantity > 0">
+                    <field name="valuation_date"/>
+                    <field name="product_id" groupby="1"/>
+                    <field name="valuation_account_id" groupby="1"/> 
+                    <field name="location_id" groupby="1"/>
+                    <field name="lot_id"/>
+                    <field name="quantity"/>
+                    <!--field name="reserved_quantity"/-->
+                    <field name="unit_value"/>
+                    <field name="total_valuation"/>
+                    <field name="layer_account_move_id"/>
+                    <!--field name="quant_account_move_id"/-->
+                    <field name="stock_move_date"/>
+                    <field name="move_reference"/>
+                    <field name="account_move_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_inventory_valuation_report_pivot" model="ir.ui.view">
+            <field name="name">inventory.valuation.report.pivot</field>
+            <field name="model">inventory.valuation.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Reporte de Valorización de Inventario">
+                    <field name="valuation_date" type="row"/>
+                    <field name="location_id" type="row"/>
+                    <field name="product_id" type="row"/>
+                    <field name="quantity" type="measure"/>
+                    <field name="total_valuation" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+
+
+        <record id="action_inventory_valuation_report" model="ir.actions.act_window">
+            <field name="name">Reporte de Valorización de Inventario</field>
+            <field name="res_model">inventory.valuation.report</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_inventory_valuation_wizard" name="Generar Reporte de Valorización"
+                parent="stock.menu_stock_root"
+                action="action_inventory_valuation_wizard"/>
+
+        <menuitem id="menu_inventory_valuation_report" name="Valorización de Inventario"
+                parent="stock.menu_stock_root"
+                action="action_inventory_valuation_report"/>
+
+</odoo>

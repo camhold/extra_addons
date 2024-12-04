@@ -1,0 +1,101 @@
+<odoo>
+    <!-- Vista heredada para el wizard account.payment.register -->
+    <record id="view_account_reg_payment_form_mp" model="ir.ui.view">
+        <field name="name">account.payment.register.form.inherit.mp</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <!-- Añadir el campo mp_grupo_flujo_id después de partner_bank_id -->
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <field name="mp_grupo_flujo_id" options="{'no_create': True, 'no_open':True}" required="1"/>
+            </xpath>
+                        <xpath expr="//field[@name='communication']" position="after">
+                <field name="mp_flujo_id" options="{'no_create': True, 'no_open':True}"
+                     domain="[('grupo_flujo_id', '=', mp_grupo_flujo_id)]"
+                      widget="many2many_tags"
+                /> 
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Herencia para la vista de pagos en modo tree: account.view_account_supplier_payment_tree -->
+    <record id="view_account_payment_tree_inherit_flujo" model="ir.ui.view">
+        <field name="name">account.payment.tree.inherit.flujo</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_supplier_payment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='partner_id']" position="before">
+                <field name="partner_vat" string="RUT"/>
+                <field name="mp_grupo_flujo_id"/>
+                <field name="mp_flujo_id"  widget="selection" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vista heredada para account.move en modo tree (facturas de proveedor) -->
+    <record id="view_in_invoice_bill_tree_inherit_flujo" model="ir.ui.view">
+        <field name="name">account.invoice.tree.inherit.flujo</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_bill_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='invoice_partner_display_name']" position="before">
+                <!-- Usar el campo correcto para flujos en facturas -->
+                <field name="mp_flujo_id" domain="[('grupo_flujo_id', '=', mp_grupo_flujo_id)]"  widget="selection" />
+                <field name="mp_grupo_flujo_id"/>
+                <field name="partner_vat" string="RUT"/>
+            </xpath>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_account_payment_search_ext_custom">
+        <field name="name">account.custom.search</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='company']" position="after">
+                <filter string="Por grupo flujo"
+                        name="groupby_mp_grupo_flujo_id"
+                        context="{'group_by': 'mp_grupo_flujo_id'}"/>
+                <filter string="Por flujo"
+                        name="groupby_mp_flujo_id"
+                        context="{'group_by': 'mp_flujo_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tree_report_flujo_cus" model="ir.ui.view">
+        <field name="name">report.flujo.tree</field>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="name"/>
+                <field name="journal_id"/>
+                <field name="mp_grupo_flujo_id"/>
+                <field name="mp_flujo_id"/>
+                <field name="payment_method_line_id"/>
+                <field name="partner_id"/>
+                <field name="batch_payment_id"/>
+                <field name="amount_signed"/>
+                <field name="amount_company_currency_signed" sum="Total"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_report_mp_flujo_cus">
+        <field name="name">Reportes de flujo y grupo flujo</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="tree_report_flujo_cus"/>
+        <field name="search_view_id" ref="view_account_payment_search_ext_custom"/>
+        <field name="context">{'group_by': ['mp_grupo_flujo_id', 'mp_flujo_id']}</field>
+    </record>
+
+    <menuitem id="menu_action_report_mp_flujo_cus"
+              name="Informe de grupo flujos y flujos"
+              action="action_report_mp_flujo_cus"
+              parent="account.menu_finance_entries"
+              sequence="3"/>
+
+</odoo>
