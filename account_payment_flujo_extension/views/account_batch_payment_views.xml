@@ -8,8 +8,8 @@
             <!-- Insertar dentro del sheet principal -->
             <xpath expr="//field[@name='name']" position="after">
                 <group string="Flujo de Gestión">
-                    <field name="mpflujo" options="{'no_create': True, 'no_open':True}"/>
-                    <field name="mpgrupo_flujo" options="{'no_create': True, 'no_open':True}"/>
+                    <field name="mpflujo" options="{'no_create': True, 'no_open':True}" readonly="1"/>
+                    <field name="mpgrupo_flujo" options="{'no_create': True, 'no_open':True}" readonly="1"/>
                 </group>
             </xpath>
         </field>
