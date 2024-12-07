@@ -4,6 +4,7 @@
     'author': 'I+D, Diego Gajardo, Camilo Neira, Diego Morales',
     'website': 'https://www.holdconet.com',
     'category': 'account',
+    'license': 'LGPL-3',
     'version': '17.0.0.0.1',
     'depends': ['account', 'l10n_latam_invoice_document'],
     'data': [

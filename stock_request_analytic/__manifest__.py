@@ -1,7 +1,8 @@
 
 {
     'name': 'stock_request_analytic',
-    'version': '1.0',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'category': 'Inventory',
     'summary': 'Inherit analytic accounts in stock requests',
     'description': 'Adds analytic account fields to stock requests and their lines.',

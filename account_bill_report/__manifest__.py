@@ -5,6 +5,7 @@
     'author': "MP Flow",
     'website': "https://example.com",
     'category': 'Accounting',
+    'license': 'LGPL-3',
     'version': '17.0.0.0.1',
     'depends': ['account', 'base'],
     'data': [

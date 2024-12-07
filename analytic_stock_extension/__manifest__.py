@@ -1,7 +1,8 @@
 {
     'name': 'Stock Analytic Extension',
-    'version': '1.0',
     'category': 'Warehouse',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'author': 'I+D, Diego Gajardo, Camilo Neira, Diego Morales',
     'website': 'https://www.holdconet.com',
     'depends': ['stock', 'account', 'analytic','analytic_account_blocker'],

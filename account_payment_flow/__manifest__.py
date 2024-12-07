@@ -4,7 +4,8 @@
     'author': "MP Flow",
     'website': "https://example.com",
     'category': 'Accounting',
-    'version': '17.0',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'depends': ['account'],
     'data': [
         'security/ir.model.access.csv',

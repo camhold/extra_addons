@@ -1,6 +1,7 @@
 {
     'name': 'Stock Location Code',
-    'version': '17.0.1.0.0',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'category': 'Warehouse',
     'summary': 'Adds a unique alphanumeric code to stock locations',
     'author': 'I+D, Diego Gajardo, Camilo Neira, Diego Morales',

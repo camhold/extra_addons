@@ -1,6 +1,7 @@
 {
     'name': 'Stock Picking Importer',
-    'version': '1.0',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'depends': ['base', 'stock', 'base_import'],
     'author': 'I+D, Diego Gajardo, Camilo Neira, Diego Morales',
     'website': 'https://www.holdconet.com',

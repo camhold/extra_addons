@@ -1,6 +1,5 @@
 {
     'name': 'Custom L10n CL Red box',
-    'version': '1.0',
     'category': 'Localization',
     'summary': 'Modificaciones personalizadas al reporte de factura de l10n_cl',
     'description': '''
@@ -8,6 +7,8 @@
         1. El color del borde de la caja que contiene el RUT y la factura.
         2. Cambia "VAT" por "IVA" en los detalles de impuestos.
     ''',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'author': 'Diego Gajardo',
     'website': 'http://www.Holdconet.cl',
     'depends': ['l10n_cl'],

@@ -2,7 +2,7 @@ from odoo import models, fields, _, api
 from odoo.exceptions import ValidationError, UserError
 import logging
 
-_logger = logging.getLogger(__name__)
+#_logger = logging.getLogger(__name__)
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -94,3 +94,4 @@ class AccountPaymentRegister(models.TransientModel):
         mp_flujo_id = self.env['mp.flujo'].search([('id', '=', self._context.get('mp_flujo_id'))])
         if mp_flujo_id:
             self.mp_flujo_id = mp_flujo_id
+            

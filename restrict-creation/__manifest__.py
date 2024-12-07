@@ -1,6 +1,7 @@
 {
     'name': 'Restrict Creation',
-    'version': '1.2',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'category': 'Customization',
     'summary': 'Restrict creation of new products and contacts in selection fields',
     'author': 'I+D, Diego Gajardo, Camilo Neira, Diego Morales',

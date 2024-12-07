@@ -1,6 +1,7 @@
 {
     'name': 'Stock Validation Fix',
-    'version': '17.0.0.1',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'author': 'Adrian Hernandez',
     'category': 'Inventory',
     'depends': ['stock','stock_request'],

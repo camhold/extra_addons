@@ -1,6 +1,7 @@
 {
     'name': 'Stock Request Order OWL Plugin',
-    'version': '1.0',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'category': 'Warehouse',
     'summary': 'OWL Plugin for Stock Request Order Lines',
     'depends': ['stock', 'stock_account'],

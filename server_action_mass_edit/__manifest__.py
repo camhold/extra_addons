@@ -2,7 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Mass Editing",
-    "version": "17.0.1.0.0",
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     "author": "Serpent Consulting Services Pvt. Ltd., "
     "Tecnativa, "
     "GRAP, "
@@ -10,7 +11,6 @@
     "Odoo Community Association (OCA)",
     "category": "Tools",
     "website": "https://github.com/OCA/server-ux",
-    "license": "AGPL-3",
     "summary": "Mass Editing",
     "depends": [
         "base",

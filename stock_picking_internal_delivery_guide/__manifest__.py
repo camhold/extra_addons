@@ -1,7 +1,8 @@
 
 {
     'name': 'Stock Picking Internal Delivery Guide',
-    'version': '1.0',
+    'license': 'LGPL-3',
+    'version': '17.0.0.0.1',
     'summary': 'Muestra el botón de Create Delivery Guide en transferencias internas.',
     'author': 'Tu nombre',
     'depends': ['stock', 'l10n_cl'],
